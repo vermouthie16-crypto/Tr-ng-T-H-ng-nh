@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trương Thị Hồng Ánh — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF8F1;
+    --cream-2:#F1ECDF;
+    --card:#FFFFFF;
+    --navy:#13233F;
+    --navy-deep:#0B1730;
+    --navy-soft:#3E5578;
+    --ink:#152238;
+    --ink-soft:#5B6A85;
+    --gold:#C9A24B;
+    --line:rgba(19,35,63,0.14);
+    --shadow: 0 14px 34px rgba(19,35,63,0.12);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    font-family:'Nunito', sans-serif;
+    color:var(--ink);
+    line-height:1.65;
+    position:relative;
+    overflow-x:hidden;
+    background:linear-gradient(120deg, #F1ECDF 0%, #FBF8F1 30%, #E3E8F0 60%, #F1ECDF 100%);
+    background-size:300% 300%;
+    animation:gradientShift 18s ease infinite;
+  }
+  @keyframes gradientShift{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+
+  h1,h2,h3{font-family:'Baloo 2', sans-serif; font-weight:700;}
+  .script{font-family:'Baloo 2', sans-serif; font-weight:800; color:var(--navy);}
+
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  :focus-visible{outline:3px solid var(--navy); outline-offset:3px; border-radius:6px;}
+
+  .page{position:relative; z-index:1;}
+
+  /* ---------- BACKGROUND DECOR (continuous drift = "nền động") ---------- */
+  .bg-decor{position:fixed; inset:0; overflow:hidden; z-index:0; pointer-events:none;}
+  .blob{position:absolute; border-radius:50%; filter:blur(75px); will-change:transform;}
+  .blob-1{width:460px; height:460px; top:-14%; left:-10%; background:radial-gradient(circle at 30% 30%, #1B2E52 0%, transparent 70%); opacity:0.14; animation:drift1 24s ease-in-out infinite;}
+  .blob-2{width:520px; height:520px; bottom:-16%; right:-12%; background:radial-gradient(circle at 60% 40%, #C9A24B 0%, transparent 70%); opacity:0.16; animation:drift2 28s ease-in-out infinite;}
+  .blob-3{width:380px; height:380px; top:34%; left:58%; background:radial-gradient(circle at 50% 50%, #3E5578 0%, transparent 70%); opacity:0.16; animation:drift3 20s ease-in-out infinite;}
+  .blob-4{width:300px; height:300px; top:66%; left:8%; background:radial-gradient(circle at 50% 50%, #13233F 0%, transparent 70%); opacity:0.1; animation:drift1 26s ease-in-out infinite reverse;}
+  @keyframes drift1{0%,100%{transform:translate(0,0) rotate(0deg);} 50%{transform:translate(50px,40px) rotate(12deg);}}
+  @keyframes drift2{0%,100%{transform:translate(0,0) rotate(0deg);} 50%{transform:translate(-45px,-35px) rotate(-10deg);}}
+  @keyframes drift3{0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-30px,25px) scale(1.08);}}
+
+  .sparkle{
+    position:absolute; width:5px; height:5px; background:var(--gold); border-radius:50%;
+    box-shadow:0 0 6px 2px rgba(201,162,75,0.7), 0 0 16px 5px rgba(19,35,63,0.15);
+    animation:twinkle 3.4s ease-in-out infinite;
+  }
+  .sparkle.big{width:8px; height:8px;}
+  @keyframes twinkle{
+    0%,100%{opacity:0.15; transform:scale(0.5);}
+    50%{opacity:1; transform:scale(1.25);}
+  }
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,248,241,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px; max-width:1180px; margin:0 auto; gap:20px;
+  }
+  .logo{font-family:'Baloo 2', sans-serif; font-weight:800; font-size:1.3rem; color:var(--navy);}
+  .nav-links{display:flex; gap:8px; list-style:none; font-weight:600; font-size:0.92rem; background:#fff; padding:6px; border-radius:999px; border:1px solid var(--line); box-shadow:var(--shadow);}
+  .nav-links a{padding:9px 18px; border-radius:999px; display:inline-block; transition:background 0.2s ease, color 0.2s ease;}
+  .nav-links a:hover, .nav-links a:focus-visible{background:var(--navy); color:#fff;}
+  .nav-actions{display:flex; gap:10px; align-items:center;}
+  @media (max-width:900px){.nav-links{display:none;}}
+  @media (max-width:620px){.nav-actions .btn-outline span{display:none;}}
+
+  .btn{
+    font-family:'Nunito', sans-serif; font-weight:700; font-size:0.88rem;
+    padding:11px 20px; border-radius:999px; cursor:pointer;
+    display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+    transition:transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    border:1.5px solid var(--navy);
+    position:relative; overflow:hidden;
+  }
+  .btn::after{
+    content:""; position:absolute; top:0; left:-75%; width:45%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.65), transparent);
+    transform:skewX(-20deg); transition:left 0.55s ease;
+  }
+  .btn:hover::after{left:130%;}
+  .btn:hover{transform:translateY(-3px); box-shadow:0 10px 22px rgba(19,35,63,0.22);}
+  .btn-outline{background:#fff; color:var(--navy);}
+  .btn-outline:hover{background:var(--navy); color:#fff;}
+  .btn-solid{background:var(--navy); color:#fff; border-color:var(--navy);}
+  .btn-solid:hover{background:var(--navy-deep); border-color:var(--navy-deep);}
+  .btn-lg{padding:14px 26px; font-size:0.95rem;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:72px 32px 40px; max-width:1180px; margin:0 auto; scroll-margin-top:100px;}
+  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center;}
+  @media (max-width:860px){.hero-grid{grid-template-columns:1fr; text-align:center;}}
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--line);
+    color:var(--navy); font-weight:700; padding:7px 16px; border-radius:999px;
+    font-size:0.82rem; margin-bottom:20px; box-shadow:var(--shadow);
+  }
+  .hero h1{font-size:clamp(2rem, 4.6vw, 3.1rem); line-height:1.18; font-weight:700; color:var(--ink);}
+  .hero h1 .script{font-size:clamp(2.3rem, 5.4vw, 3.6rem); display:block; margin-top:2px;}
+  .hero p.lead{margin:22px 0 0; font-size:1.04rem; color:var(--ink-soft); max-width:540px; font-weight:500;}
+  @media (max-width:860px){.hero p.lead{margin-left:auto; margin-right:auto;}}
+  .hero p.lead b{color:var(--gold); font-weight:800;}
+
+  .avatar{
+    position:relative; width:100%; max-width:300px; margin:0 auto; aspect-ratio:1/1;
+    border-radius:36px; overflow:hidden; border:5px solid #fff; box-shadow:var(--shadow);
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%);
+    display:flex; align-items:center; justify-content:center;
+    transition:transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .avatar:hover{transform:rotate(-2deg) scale(1.03); box-shadow:0 20px 44px rgba(19,35,63,0.3);}
+  .avatar .initials{font-family:'Baloo 2', sans-serif; font-weight:800; font-size:4.2rem; color:var(--cream); letter-spacing:2px;}
+  .avatar .cap{position:absolute; bottom:16px; right:18px; font-size:2rem;}
+
+  .info-grid{
+    margin-top:32px; background:#fff; border:1px solid var(--line); border-radius:22px;
+    padding:22px 26px; box-shadow:var(--shadow); display:grid; grid-template-columns:repeat(2, 1fr); gap:16px 24px;
+  }
+  @media (max-width:520px){.info-grid{grid-template-columns:1fr;}}
+  .info-item label{display:block; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--navy); font-weight:800; margin-bottom:3px;}
+  .info-item .val{font-size:0.92rem; font-weight:700; color:var(--ink);}
+
+  /* ---------- SECTION SHARED ---------- */
+  .section{padding:80px 32px; max-width:1180px; margin:0 auto; scroll-margin-top:100px;}
+  .section-head{text-align:center; margin-bottom:48px;}
+  .tag{
+    display:inline-block; background:#fff; border:1px solid var(--line); color:var(--navy);
+    font-weight:700; font-size:0.8rem; padding:6px 16px; border-radius:999px; margin-bottom:16px;
+  }
+  .section-head h2{font-size:clamp(1.8rem, 3.6vw, 2.4rem);}
+  .section-head p{color:var(--ink-soft); margin-top:10px; font-weight:500;}
+
+  /* ---------- WORK / ASSIGNMENTS ---------- */
+  .grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;}
+  @media (max-width:920px){.grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:620px){.grid{grid-template-columns:1fr;}}
+
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:22px; padding:26px 24px;
+    box-shadow:var(--shadow); transition:transform 0.22s ease, box-shadow 0.22s ease;
+    display:flex; flex-direction:column;
+  }
+  .card:hover{transform:translateY(-7px) scale(1.015); box-shadow:0 22px 44px rgba(19,35,63,0.22);}
+  .card-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
+  .card-num{font-size:0.76rem; font-weight:800; color:var(--navy); background:var(--cream-2); padding:4px 11px; border-radius:999px;}
+  .card-ic{font-size:1.5rem; display:inline-block; transition:transform 0.35s ease;}
+  .card:hover .card-ic{transform:scale(1.25) rotate(10deg);}
+  .card h3{font-size:1.05rem; margin-bottom:8px; line-height:1.35;}
+  .card p{font-size:0.88rem; color:var(--ink-soft); font-weight:500; margin-bottom:20px; flex:1;}
+  .card-actions{display:flex; gap:10px;}
+  .card-actions .btn{padding:9px 16px; font-size:0.78rem;}
+
+  /* ---------- REFLECTION ---------- */
+  .reflect-card{
+    background:var(--card); border:1px solid var(--line); border-radius:28px; padding:50px 44px;
+    box-shadow:var(--shadow);
+  }
+  .reflect-head{text-align:center; margin-bottom:38px;}
+  .reflect-head h2{font-size:clamp(1.7rem, 3.4vw, 2.2rem);}
+  .reflect-head p{color:var(--ink-soft); font-style:italic; margin-top:10px; font-weight:500;}
+  .reflect-cols{display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-bottom:38px;}
+  @media (max-width:760px){.reflect-cols{grid-template-columns:1fr;}}
+  .reflect-cols h4{font-size:0.98rem; margin-bottom:8px; display:flex; gap:8px; align-items:center;}
+  .reflect-cols p{font-size:0.9rem; color:var(--ink-soft); font-weight:500;}
+  .stats-row{
+    display:flex; justify-content:space-around; flex-wrap:wrap; gap:24px;
+    border-top:1px dashed var(--line); padding-top:32px;
+  }
+  .stat{text-align:center; transition:transform 0.25s ease;}
+  .stat:hover{transform:translateY(-4px);}
+  .stat .num{font-family:'Baloo 2', sans-serif; font-weight:800; font-size:2.1rem; color:var(--navy); transition:color 0.25s ease, transform 0.25s ease;}
+  .stat:hover .num{color:var(--gold); transform:scale(1.1);}
+  .stat .lbl{font-size:0.8rem; color:var(--ink-soft); font-weight:700; margin-top:4px;}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact-box{
+    background:var(--navy); color:#fff; border-radius:32px; padding:60px 40px; text-align:center;
+  }
+  .contact-box h2{font-size:clamp(1.6rem, 3.6vw, 2.2rem); margin-bottom:14px;}
+  .contact-box p{max-width:440px; margin:0 auto 28px; font-weight:500; opacity:0.85;}
+  .contact-box .btn-outline{background:transparent; color:#fff; border-color:#fff;}
+  .contact-box .btn-outline:hover{background:#fff; color:var(--navy);}
+
+  footer{text-align:center; padding:30px; font-size:0.82rem; color:var(--ink-soft); font-weight:600;}
+
+  .reveal{opacity:0; transform:translateY(20px) scale(0.98); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0) scale(1);}
+</style>
+</head>
+<body>
+
+<div class="bg-decor" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+  <span class="sparkle" style="top:8%; left:12%; animation-delay:0s;"></span>
+  <span class="sparkle big" style="top:18%; left:82%; animation-delay:0.6s;"></span>
+  <span class="sparkle" style="top:28%; left:45%; animation-delay:1.1s;"></span>
+  <span class="sparkle" style="top:42%; left:8%; animation-delay:0.3s;"></span>
+  <span class="sparkle big" style="top:55%; left:90%; animation-delay:1.6s;"></span>
+  <span class="sparkle" style="top:65%; left:30%; animation-delay:0.9s;"></span>
+  <span class="sparkle" style="top:75%; left:70%; animation-delay:1.9s;"></span>
+  <span class="sparkle big" style="top:88%; left:15%; animation-delay:0.4s;"></span>
+  <span class="sparkle" style="top:95%; left:55%; animation-delay:1.3s;"></span>
+</div>
+
+<div class="page">
+
+<header>
+  <nav>
+    <a href="#top" class="logo">Hồng Ánh</a>
+    <ul class="nav-links">
+      <li><a href="#top">Giới thiệu</a></li>
+      <li><a href="#work">Bài tập</a></li>
+      <li><a href="#reflect">Tổng kết</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn btn-outline"><span>📁 Google Drive</span></a>
+      <a href="#contact" class="btn btn-solid">Gửi phản hồi</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow reveal">🎓 Tiếng Việt và Văn hóa Việt Nam · ULIS – ĐHQGHN</div>
+      <h1 class="reveal">Xin chào! Mình là<span class="script">Trương Thị Hồng Ánh</span></h1>
+      <p class="lead reveal">Sinh viên ngành <b>Tiếng Việt và Văn hóa Việt Nam</b>, Khoa <b>Ngôn ngữ & Văn hóa Việt Nam và Đông Nam Á</b> tại <b>Trường Đại học Ngoại ngữ - ĐHQGHN</b>. Đây là nơi mình lưu lại hành trình học tập, các dự án và trải nghiệm cá nhân trong suốt thời gian vừa qua khi tham gia học phần Nhập môn Công nghệ số & ứng dụng AI.</p>
+
+      <div class="info-grid reveal">
+        <div class="info-item">
+          <label>Họ và tên</label>
+          <div class="val">Trương Thị Hồng Ánh</div>
+        </div>
+        <div class="info-item">
+          <label>MSSV</label>
+          <div class="val">25040306</div>
+        </div>
+        <div class="info-item">
+          <label>Ngành</label>
+          <div class="val">Tiếng Việt và Văn hóa Việt Nam</div>
+        </div>
+        <div class="info-item">
+          <label>Khoa</label>
+          <div class="val">NN-VH Việt Nam và Đông Nam Á</div>
+        </div>
+        <div class="info-item">
+          <label>Trường</label>
+          <div class="val">Đại học Ngoại ngữ - ĐHQGHN</div>
+        </div>
+        <div class="info-item">
+          <label>Mã lớp học phần</label>
+          <div class="val">VNU1001_E252059</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="avatar reveal">
+      <span class="initials">TA</span>
+      <span class="cap">🎓</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="section-head reveal">
+    <span class="tag"Sản phẩm & hoạt động"</span>
+    <h2>Tổng hợp bài tập cá nhân</h2>
+    <p>Tổng hợp các dự án, hoạt động và sản phẩm cá nhân trong quá trình học tập</p>
+  </div>
+  <div class="grid reveal">
+    <article class="card">
+      <div class="card-top"><span class="card-num">Bài 1</span><span class="card-ic">📁</span></div>
+      <h3>Thao tác cơ bản với tệp tin và thư mục</h3>
+      <p>Thực hành tạo, đổi tên, sao chép, di chuyển và xóa tệp tin/thư mục trên Windows — từ thao tác cơ bản đến khôi phục dữ liệu từ Thùng rác.</p>
+      <div class="card-actions">
+        <a href="#" class="btn btn-outline">Chi tiết</a>
+        <a href="#" class="btn btn-solid">GG Drive</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-top"><span class="card-num">Bài 2</span><span class="card-ic">🔍</span></div>
+      <h3>Tìm kiếm và đánh giá thông tin học thuật</h3>
+      <p>Tìm kiếm, tổng hợp và đánh giá độ tin cậy của các nguồn tài liệu học thuật liên quan đến chủ đề nghiên cứu cá nhân từ Google Scholar và các tạp chí chuyên ngành.</p>
+      <div class="card-actions">
+        <a href="#" class="btn btn-outline">Chi tiết</a>
+        <a href="#" class="btn btn-solid">GG Drive</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-top"><span class="card-num">Bài 3</span><span class="card-ic">💬</span></div>
+      <h3>Viết Prompt hiệu quả cho các tác vụ học tập</h3>
+      <p>Thiết kế và thử nghiệm 3 cấp độ prompt — cơ bản, cải tiến, nâng cao — để tạo bộ câu hỏi ôn tập, phân loại theo mức độ nhận thức.</p>
+      <div class="card-actions">
+        <a href="#" class="btn btn-outline">Chi tiết</a>
+        <a href="#" class="btn btn-solid">GG Drive</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-top"><span class="card-num">Bài 4</span><span class="card-ic">🤝</span></div>
+      <h3>Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm</h3>
+      <p>Phối hợp nhóm qua Google Docs, Meet và Drive cho dự án nhóm — phụ trách nội dung, quay dựng video và quản lý thư mục chia sẻ.</p>
+      <div class="card-actions">
+        <a href="#" class="btn btn-outline">Chi tiết</a>
+        <a href="#" class="btn btn-solid">GG Drive</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-top"><span class="card-num">Bài 5</span><span class="card-ic">🎨</span></div>
+      <h3>Sử dụng AI tạo sinh để hỗ trợ sáng tạo nội dung</h3>
+      <p>Kết hợp ChatGPT, DALL-E và Canva AI để lên dàn ý, tạo hình ảnh minh họa và thiết kế slide cho bài thuyết trình nhóm.</p>
+      <div class="card-actions">
+        <a href="#" class="btn btn-outline">Chi tiết</a>
+        <a href="#" class="btn btn-solid">GG Drive</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-top"><span class="card-num">Bài 6</span><span class="card-ic">🛡️</span></div>
+      <h3>Sử dụng AI có trách nhiệm trong học tập và nghiên cứu</h3>
+      <p>Nghiên cứu chính sách sử dụng AI của ULIS – VNU và thực hành nguyên tắc liêm chính học thuật khi ứng dụng AI vào bài tập môn học.</p>
+      <div class="card-actions">
+        <a href="#" class="btn btn-outline">Chi tiết</a>
+        <a href="#" class="btn btn-solid">GG Drive</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="reflect">
+  <div class="reflect-card reveal">
+    <div class="reflect-head">
+      <span class="tag">Tổng kết</span>
+      <h2>Nhìn nhận & Trải nghiệm học tập</h2>
+      <p>"AI chỉ là chất xúc tác tăng tốc, sự thấu suốt và sáng tạo của con người mới là đích đến"</p>
+    </div>
+    <div class="reflect-cols">
+      <div>
+        <h4>📚 Bài học cốt lõi</h4>
+        <p>Qua từng dự án, mình học được cách chủ động tìm hiểu, rèn luyện kỹ năng số và biết cách kết hợp sự sáng tạo vào công việc học thuật lẫn hoạt động nhóm. Hành trình trải nghiệm môn "Nhập môn Công nghệ số và ứng dụng trí tuệ nhân tạo" đã thay đổi hoàn toàn tư duy của mình. Mình hiểu rằng,
+kỹ năng Prompt Engineering kết hợp với tư duy phản biện là yếu tố quyết định chất lượng sản phẩm, AI mang lại hiệu suất vượt trội, nhưng cảm xúc và sự độc bản vẫn luôn thuộc về con người.</p>
+      </div>
+      <div>
+        <h4>🌱 Quá trình trưởng thành</h4>
+        <p>Hành trình đi từ những bỡ ngỡ ban đầu khi học cách quản lý thư mục đến lúc làm chủ kỹ năng tổ chức hệ thống lưu trữ dữ liệu khoa học trên Google Drive là một bước tiến lớn của mình. Bên cạnh đó, mình cũng đã nâng cấp bản thân qua việc tối ưu hóa hiệu suất làm việc nhóm trên Google Meet, cũng như tự tay thiết kế và chuẩn hóa các tài liệu học tập một cách chỉn chu nhờ sự hỗ trợ đắc lực và có kiểm chứng chặt chẽ từ AI.</p>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="num">06/06</div>
+        <div class="lbl">Dự án hoàn thành</div>
+      </div>
+      <div class="stat">
+        <div class="num">100%</div>
+        <div class="lbl">Nhiệt huyết & cố gắng</div>
+      </div>
+      <div class="stat">
+        <div class="num">A+</div>
+        <div class="lbl">Mục tiêu môn học</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  made by Trương Thị Hồng Ánh · © 2026
+</footer>
+
+</div>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
